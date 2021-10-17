@@ -36,8 +36,7 @@ namespace TeamsPresencePublisher
             _publishers = publishers;
 
             _presenceViewModel = presenceViewModel;
-            _presenceViewModel.MQTTOptions.PropertyChanged += Options_Changed;
-            _presenceViewModel.ESPHomeAPIOptions.PropertyChanged += Options_Changed;
+            _presenceViewModel.GlobalOptions.PropertyChanged += Options_Changed;
 
             _timer.Interval = TimeSpan.FromSeconds(15);
             _timer.Tick += _timer_Tick;

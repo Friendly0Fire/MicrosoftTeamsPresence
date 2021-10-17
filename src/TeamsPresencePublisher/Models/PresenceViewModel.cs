@@ -98,13 +98,11 @@ namespace TeamsPresencePublisher.Models
             }
         }
 
-        public ESPHomeAPIOptions ESPHomeAPIOptions { get; set; }
-        public MQTTOptions MQTTOptions { get; set; }
+        public GlobalOptions GlobalOptions { get; set; }
 
-        public PresenceViewModel(ESPHomeAPIOptions espHomeAPIOptions, MQTTOptions mqttOptions)
+        public PresenceViewModel(GlobalOptions globalOptions)
         {
-            ESPHomeAPIOptions = espHomeAPIOptions;
-            MQTTOptions = mqttOptions;
+            GlobalOptions = globalOptions;
         }
     }
 }

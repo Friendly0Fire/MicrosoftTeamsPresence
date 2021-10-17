@@ -38,8 +38,14 @@ namespace TeamsPresencePublisher.Services
 
         public async Task<string> GetUsernameAsync()
         {
-            User user = await _graphClient.Me.Request().GetAsync();
-            return user.PreferredName ?? user.DisplayName;
+            try {
+                User user = await _graphClient.Me.Request().GetAsync();
+                return user.PreferredName ?? user.DisplayName;
+            }
+            catch
+            {
+                return "<unknown user>";
+            }
         }
 
         public BitmapImage GetDefaultPhoto()

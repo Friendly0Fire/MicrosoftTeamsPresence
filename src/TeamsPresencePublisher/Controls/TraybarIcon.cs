@@ -105,7 +105,7 @@ namespace TeamsPresencePublisher.Controls
         private void ItemShow_Click(object sender, EventArgs e)
         {
             _mainWindow.Show();
-            _mainWindow.Activate();
+            _ = _mainWindow.Activate();
         }
 
         private void ItemQuit_Click(object sender, EventArgs e)

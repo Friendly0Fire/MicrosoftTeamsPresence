@@ -11,11 +11,11 @@ namespace TeamsPresencePublisher.Publishers
 {
     class MQTTPublisher : IPublisher
     {
-        private readonly MQTTOptions _options;
+        private readonly Options.GlobalOptions _options;
         private IMqttClient _mqttClient;
         private IMqttClientOptions _mqttClientOptions;
 
-        public MQTTPublisher(IMqttFactory factory, MQTTOptions options)
+        public MQTTPublisher(IMqttFactory factory, Options.GlobalOptions options)
         {
             _mqttClient = factory.CreateMqttClient();
             _options = options;

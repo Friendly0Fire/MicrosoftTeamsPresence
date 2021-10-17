@@ -34,29 +34,24 @@ namespace TeamsPresencePublisher
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
-
-            services.AddSingleton<TraybarIcon>();
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<IMqttFactory, MqttFactory>();
-            services.AddSingleton<PresenceViewModel>();
-            services.AddSingleton<IMicrosoftAuthentication, MicrosoftAuthentication>();
-            services.AddSingleton<IAuthenticationProvider>(
-                serviceProvider => serviceProvider.GetRequiredService<IMicrosoftAuthentication>().AuthProvider);
-            services.AddSingleton<IPresenceService, PresenceService>();
-            services.AddSingleton<ESPHomeAPIPublisher>();
-            services.AddSingleton<MQTTPublisher>();
-            services.AddSingleton<TeamsPresencePublisherOptions>();
-            services.AddScoped<IOptionsService, OptionsService>();
-            services.AddSingleton<MQTTOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptionsService>().ReadSettingsAsync<MQTTOptions>().Result);
-            services.AddSingleton<ESPHomeAPIOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptionsService>().ReadSettingsAsync<ESPHomeAPIOptions>().Result);
-
-            services.AddSingleton<IEnumerable<IPublisher>>(
-                serviceProvider => new List<IPublisher>
-                {
-                    serviceProvider.GetRequiredService<MQTTPublisher>(),
-                    serviceProvider.GetRequiredService<ESPHomeAPIPublisher>()
-                });
+            _ = services.AddHttpClient()
+                        .AddSingleton<TraybarIcon>()
+                        .AddSingleton<MainWindow>()
+                        .AddSingleton<IMqttFactory, MqttFactory>()
+                        .AddSingleton<PresenceViewModel>()
+                        .AddSingleton<IMicrosoftAuthentication, MicrosoftAuthentication>()
+                        .AddSingleton<IAuthenticationProvider>(
+                            serviceProvider => serviceProvider.GetRequiredService<IMicrosoftAuthentication>().AuthProvider)
+                        .AddSingleton<IPresenceService, PresenceService>()
+                        .AddSingleton<MQTTPublisher>()
+                        .AddSingleton<TeamsPresencePublisherOptions>()
+                        .AddScoped<IOptionsService, OptionsService>()
+                        .AddSingleton<GlobalOptions>(serviceProvider => serviceProvider.GetRequiredService<IOptionsService>().ReadSettingsAsync<GlobalOptions>().Result)
+                        .AddSingleton<IEnumerable<IPublisher>>(
+                            serviceProvider => new List<IPublisher>
+                            {
+                                serviceProvider.GetRequiredService<MQTTPublisher>()
+                            });
         }
     }
 }

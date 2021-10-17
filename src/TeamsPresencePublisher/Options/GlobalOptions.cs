@@ -2,7 +2,7 @@
 
 namespace TeamsPresencePublisher.Options
 {
-    public class MQTTOptions : INotifyPropertyChanged
+    public class GlobalOptions : INotifyPropertyChanged
     {
         private bool _enabled;
         private string _host = "localhost";
@@ -10,6 +10,7 @@ namespace TeamsPresencePublisher.Options
         private string _username = "Hans";
         private string _password = "Test";
         private string _topic = "microsoft/graph/me/presence";
+        private string _appId = "";
 
         public bool Enabled
         {
@@ -69,6 +70,16 @@ namespace TeamsPresencePublisher.Options
             {
                 _topic = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Topic)));
+            }
+        }
+
+        public string AppId
+        {
+            get => _appId;
+            set
+            {
+                _appId = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AppId)));
             }
         }
 
